@@ -1,1 +1,4 @@
-com/epam/brest/HelloController.class
+com/epam/brest/web_app/IngredientController.class
+com/epam/brest/web_app/BeverageController.class
+com/epam/brest/web_app/HomeController.class
+com/epam/brest/web_app/ClientController.class

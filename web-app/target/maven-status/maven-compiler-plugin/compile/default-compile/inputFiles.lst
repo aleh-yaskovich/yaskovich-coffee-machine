@@ -1,1 +1,4 @@
-/home/aleh/IdeaProjects/yaskovich-coffee-machine/web-app/src/main/java/com/epam/brest/HelloController.java
+/home/aleh/IdeaProjects/yaskovich-coffee-machine/web-app/src/main/java/com/epam/brest/web_app/BeverageController.java
+/home/aleh/IdeaProjects/yaskovich-coffee-machine/web-app/src/main/java/com/epam/brest/web_app/IngredientController.java
+/home/aleh/IdeaProjects/yaskovich-coffee-machine/web-app/src/main/java/com/epam/brest/web_app/HomeController.java
+/home/aleh/IdeaProjects/yaskovich-coffee-machine/web-app/src/main/java/com/epam/brest/web_app/ClientController.java
