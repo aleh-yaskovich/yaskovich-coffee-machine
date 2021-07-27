@@ -14,6 +14,8 @@
         <module>web-app</module>
         <module>test-db</module>
         <module>model</module>
+        <module>dao</module>
+        <module>dao-jdbc</module>
     </modules>
 
     <distributionManagement>
@@ -51,6 +53,16 @@
             <dependency>
                 <groupId>com.epam.brest</groupId>
                 <artifactId>test-db</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.epam.brest</groupId>
+                <artifactId>dao</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.epam.brest</groupId>
+                <artifactId>dao-jdbc</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
