@@ -30,9 +30,16 @@
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring.version>5.3.9</spring.version>
         <logback.version>1.2.3</logback.version>
     </properties>
+
+    <scm>
+        <url>https://github.com/aleh-yaskovich/yaskovich-coffee-machine</url>
+        <connection>scm:git:git://github.com/aleh-yaskovich/yaskovich-coffee-machine</connection>
+    </scm>
 
     <dependencyManagement>
         <dependencies>
