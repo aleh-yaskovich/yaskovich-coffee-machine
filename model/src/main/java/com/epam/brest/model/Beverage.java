@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Beverage {
 
     private int beverageId;
-    private  String beverageTitle;
+    private String beverageTitle;
     private int beverageIngCoffee;
     private int beverageIngMilk;
     private int beverageIngChocolate;
@@ -13,15 +13,17 @@ public class Beverage {
     private boolean beverageIngSugar;
     private boolean beverageIngSyrup;
     private boolean beverageIngCinnamon;
+    private double beveragePrice;
+    private int beverageQuantity;
     private boolean beverageHidden;
 
     public Beverage() {
     }
 
-    public Beverage(
-            int beverageId, String beverageTitle, int beverageIngCoffee, int beverageIngMilk, int beverageIngChocolate,
-            int beverageIngWater, boolean beverageIngSugar, boolean beverageIngSyrup, boolean beverageIngCinnamon, boolean beverageHidden
-    ) {
+    public Beverage(int beverageId, String beverageTitle, int beverageIngCoffee, int beverageIngMilk,
+                    int beverageIngChocolate, int beverageIngWater, boolean beverageIngSugar, boolean beverageIngSyrup,
+                    boolean beverageIngCinnamon, double beveragePrice, int beverageQuantity, boolean beverageHidden)
+    {
         this.beverageId = beverageId;
         this.beverageTitle = beverageTitle;
         this.beverageIngCoffee = beverageIngCoffee;
@@ -31,6 +33,8 @@ public class Beverage {
         this.beverageIngSugar = beverageIngSugar;
         this.beverageIngSyrup = beverageIngSyrup;
         this.beverageIngCinnamon = beverageIngCinnamon;
+        this.beveragePrice = beveragePrice;
+        this.beverageQuantity = beverageQuantity;
         this.beverageHidden = beverageHidden;
     }
 
@@ -106,6 +110,22 @@ public class Beverage {
         this.beverageIngCinnamon = beverageIngCinnamon;
     }
 
+    public double getBeveragePrice() {
+        return beveragePrice;
+    }
+
+    public void setBeveragePrice(double beveragePrice) {
+        this.beveragePrice = beveragePrice;
+    }
+
+    public int getBeverageQuantity() {
+        return beverageQuantity;
+    }
+
+    public void setBeverageQuantity(int beverageQuantity) {
+        this.beverageQuantity = beverageQuantity;
+    }
+
     public boolean isBeverageHidden() {
         return beverageHidden;
     }
@@ -119,12 +139,20 @@ public class Beverage {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Beverage beverage = (Beverage) o;
-        return beverageId == beverage.beverageId && beverageIngCoffee == beverage.beverageIngCoffee && beverageIngMilk == beverage.beverageIngMilk && beverageIngChocolate == beverage.beverageIngChocolate && beverageIngWater == beverage.beverageIngWater && beverageIngSugar == beverage.beverageIngSugar && beverageIngSyrup == beverage.beverageIngSyrup && beverageIngCinnamon == beverage.beverageIngCinnamon && beverageHidden == beverage.beverageHidden && Objects.equals(beverageTitle, beverage.beverageTitle);
+        return beverageId == beverage.beverageId && beverageIngCoffee == beverage.beverageIngCoffee &&
+                beverageIngMilk == beverage.beverageIngMilk && beverageIngChocolate == beverage.beverageIngChocolate &&
+                beverageIngWater == beverage.beverageIngWater && beverageIngSugar == beverage.beverageIngSugar &&
+                beverageIngSyrup == beverage.beverageIngSyrup && beverageIngCinnamon == beverage.beverageIngCinnamon &&
+                Double.compare(beverage.beveragePrice, beveragePrice) == 0 &&
+                beverageQuantity == beverage.beverageQuantity && beverageHidden == beverage.beverageHidden &&
+                Objects.equals(beverageTitle, beverage.beverageTitle);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(beverageId, beverageTitle, beverageIngCoffee, beverageIngMilk, beverageIngChocolate, beverageIngWater, beverageIngSugar, beverageIngSyrup, beverageIngCinnamon, beverageHidden);
+        return Objects.hash(beverageId, beverageTitle, beverageIngCoffee, beverageIngMilk, beverageIngChocolate,
+                beverageIngWater, beverageIngSugar, beverageIngSyrup, beverageIngCinnamon, beveragePrice,
+                beverageQuantity, beverageHidden);
     }
 
     @Override
@@ -139,6 +167,8 @@ public class Beverage {
                 ", beverageIngSugar=" + beverageIngSugar +
                 ", beverageIngSyrup=" + beverageIngSyrup +
                 ", beverageIngCinnamon=" + beverageIngCinnamon +
+                ", beveragePrice=" + beveragePrice +
+                ", beverageQuantity=" + beverageQuantity +
                 ", beverageHidden=" + beverageHidden +
                 '}';
     }

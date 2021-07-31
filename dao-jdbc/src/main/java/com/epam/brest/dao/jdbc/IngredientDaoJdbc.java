@@ -4,6 +4,7 @@ import com.epam.brest.dao.IngredientDao;
 import com.epam.brest.model.Ingredient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -22,12 +23,14 @@ public class IngredientDaoJdbc implements IngredientDao {
     private final static Logger LOGGER = LoggerFactory.getLogger(IngredientDaoJdbc.class);
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    private String findAllIngredientsSql = "SELECT * FROM INGREDIENT";
-    private String findIngredientByIdSql = "SELECT * FROM INGREDIENT AS I WHERE I.INGREDIENT_ID = :INGREDIENT_ID";
-    private String updateIngredientSql = "UPDATE INGREDIENT SET INGREDIENT_TITLE = :INGREDIENT_TITLE, " +
-            "INGREDIENT_QUANTITY = :INGREDIENT_QUANTITY, INGREDIENT_EXPIRATION_DATE = :INGREDIENT_EXPIRATION_DATE, " +
-            "INGREDIENT_PRICE = :INGREDIENT_PRICE, INGREDIENT_REQUIRED = :INGREDIENT_REQUIRED " +
-            "WHERE INGREDIENT_ID = :INGREDIENT_ID";
+    @Value("${ingredient.findAllIngredientsSql}")
+    private String findAllIngredientsSql;
+
+    @Value("${ingredient.findIngredientByIdSql}")
+    private String findIngredientByIdSql;
+
+    @Value("${ingredient.updateIngredientSql}")
+    private String updateIngredientSql;
 
     public IngredientDaoJdbc(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;

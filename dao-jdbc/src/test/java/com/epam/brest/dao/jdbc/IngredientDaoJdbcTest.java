@@ -11,7 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.List;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations = {"classpath*:test-db-config.xml", "classpath*:test-dao.xml", "classpath*:dao-jdbc.xml"})
+@ContextConfiguration(locations = {"classpath*:test-db-config.xml","classpath:dao-context.xml"})
 class IngredientDaoJdbcTest {
 
     @Autowired
