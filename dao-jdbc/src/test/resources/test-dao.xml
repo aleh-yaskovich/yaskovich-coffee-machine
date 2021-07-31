@@ -23,8 +23,8 @@
         <constructor-arg ref="namedParameterJdbcTemplate" />
     </bean>
 
-<!--    <bean id="beverageDao" class="com.epam.brest.dao.jdbc.BeverageDaoJdbc">-->
-<!--        <constructor-arg ref="namedParameterJdbcTemplate" />-->
-<!--    </bean>-->
+    <bean id="beverageDao" class="com.epam.brest.dao.jdbc.BeverageDaoJdbc">
+        <constructor-arg ref="namedParameterJdbcTemplate" />
+    </bean>
 
 </beans>
