@@ -77,7 +77,7 @@ public class BeverageServiceImpl implements BeverageService {
      * Create new beverage
      */
     @Override
-    public Integer createBeverage(Beverage beverage) {
+    public Integer createBeverage(Beverage beverage) throws IllegalArgumentException {
         LOGGER.debug("createBeverage({})", beverage);
         return beverageDao.createBeverage(beverage);
     }

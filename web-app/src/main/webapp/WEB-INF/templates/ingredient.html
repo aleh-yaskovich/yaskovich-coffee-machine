@@ -54,7 +54,8 @@
 		
 			<nav id="main-header" class="navbar py-1 mb-3 beverage-title">
 				<div class="container-xxl">
-					<span class="navbar-brand text-uppercase">Update ingredient «Coffee»</span>
+					<span class="navbar-brand text-uppercase">Update ingredient «
+						<span th:text="${ingredient.ingredientTitle}">Coffee</span>»</span>
 				</div>
 			</nav>
 			
@@ -66,31 +67,43 @@
 				<!-- Left column begin -->
 				<div class="col">
 					
-					<form>
+					<form id="ingredientForm"
+						  th:object="${ingredient}"
+						  action="ingredients.html"
+						  th:action="@{${#httpServletRequest.servletPath}}"
+						  th:method="@{post}">
+						<input 	id="field_ingredientId"
+								  type="hidden"
+								  th:field="*{ingredientId}" />
 						<div class="mb-3">
-							<label for="exampleInputEmail1" class="form-label">Title:</label>
-							<input class="form-control" id="exampleInputEmail1" placeholder="Coffee">
+							<label for="field_ingredientTitle" class="form-label">Title:</label>
+							<input class="form-control" id="field_ingredientTitle" type="text"
+								   th:field="*{ingredientTitle}">
 						</div>
 						
 						<div class="mb-3">
-							<label for="exampleInputEmail1" class="form-label">Quantity:</label>
-							<input class="form-control" id="exampleInputEmail1" placeholder="3760">
+							<label for="field_ingredientQuantity" class="form-label">Quantity:</label>
+							<input class="form-control" id="field_ingredientQuantity" type="text"
+								   th:field="*{ingredientQuantity}">
 						</div>
 						
 						<div class="mb-3">
-							<label for="exampleInputEmail1" class="form-label">Expiration date:</label>
-							<input class="form-control" id="exampleInputEmail1" placeholder="06-07-2021">
+							<label for="field_ingredientExpirationDate" class="form-label">Expiration date:</label>
+							<input class="form-control" id="field_ingredientExpirationDate" type="text"
+								   th:field="*{ingredientExpirationDate}">
 						</div>
 						
 						<div class="mb-3">
-							<label for="exampleInputEmail1" class="form-label">Price for 1000:</label>
-							<input class="form-control" id="exampleInputEmail1" placeholder="5,50">
+							<label for="field_ingredientPrice" class="form-label">Price for 1000:</label>
+							<input class="form-control" id="field_ingredientPrice" type="text"
+								   th:field="*{ingredientPrice}">
 						</div>
 						
 						
 						<div class="mb-4 form-check">
-							<input type="checkbox" class="form-check-input" id="exampleCheck1" checked>
-							<label class="form-check-label" for="exampleCheck1">Required</label>
+							<input type="checkbox" class="form-check-input" id="field_ingredientRequired"
+								   th:field="*{ingredientRequired}">
+							<label class="form-check-label" for="field_ingredientRequired">Required</label>
 						</div>
 						
 						<button type="submit" class="btn btn-success">Update</button>

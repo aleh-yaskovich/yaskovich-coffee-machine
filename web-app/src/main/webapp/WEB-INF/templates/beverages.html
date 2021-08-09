@@ -85,144 +85,23 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>Espresso</td>
-								<td>30 g.</td>
-								<td>92</td>
-								<td>1,00 $</td>
-								<td>Y</td>
+							<tr th:each="beverage : ${beverages}">
+								<td th:text="${beverage.beverageTitle}">Espresso</td>
+								<td>
+									<span th:text="${beverage.beverageIngCoffee +
+									beverage.beverageIngMilk +
+									beverage.beverageIngChocolate +
+									beverage.beverageIngWater}">30</span> g.</td>
+								<td th:text="${beverage.beverageQuantity}">92</td>
+								<td><span th:text="${beverage.beveragePrice}">1,00</span> $</td>
+								<td th:text="${beverage.beverageHidden}">Y</td>
 								<td class="text-end">
 									<a href="beverage.html" title="Edit beverage"
-									   th:href="@{beverage/{id}(id=1)}">
+									   th:href="@{beverage/{id}(id=${beverage.beverageId})}">
 										<i class="bi-pen"></i>&nbsp;<span class="d-none d-md-inline">Edit</span>
 									</a>&nbsp;
-									<span data-toggle="modal" data-target="#deleteModal">
-										<a href="#" >
-											<i class="bi-x"></i><span class="d-none d-md-inline">Delete</span>
-										</a>
-									</span>
-								</td>
-							</tr>
-							<tr>
-								<td>Double Espresso</td>
-								<td>60 g.</td>
-								<td>46</td>
-								<td>1,90 $</td>
-								<td>Y</td>
-								<td class="text-end">
-									<a href="beverage.html" title="Edit beverage"
-									   th:href="@{beverage/{id}(id=1)}">
-										<i class="bi-pen"></i>&nbsp;<span class="d-none d-md-inline">Edit</span>
-									</a>&nbsp;
-									<span data-toggle="modal" data-target="#deleteModal">
-										<a href="#" >
-											<i class="bi-x"></i><span class="d-none d-md-inline">Delete</span>
-										</a>
-									</span>
-								</td>
-							</tr>
-							<tr>
-								<td>Americano</td>
-								<td>150 g.</td>
-								<td>46</td>
-								<td>2,00 $</td>
-								<td>Y</td>
-								<td class="text-end">
-									<a href="beverage.html" title="Edit beverage"
-									   th:href="@{beverage/{id}(id=1)}">
-										<i class="bi-pen"></i>&nbsp;<span class="d-none d-md-inline">Edit</span>
-									</a>&nbsp;
-									<span data-toggle="modal" data-target="#deleteModal">
-										<a href="#" >
-											<i class="bi-x"></i><span class="d-none d-md-inline">Delete</span>
-										</a>
-									</span>
-								</td>
-							</tr>
-							<tr>
-								<td>Cappuccino</td>
-								<td>80 g.</td>
-								<td>76</td>
-								<td>2,00 $</td>
-								<td>N</td>
-								<td class="text-end">
-									<a href="beverage.html" title="Edit beverage"
-									   th:href="@{beverage/{id}(id=1)}">
-										<i class="bi-pen"></i>&nbsp;<span class="d-none d-md-inline">Edit</span>
-									</a>&nbsp;
-									<span data-toggle="modal" data-target="#deleteModal">
-										<a href="#" >
-											<i class="bi-x"></i><span class="d-none d-md-inline">Delete</span>
-										</a>
-									</span>
-								</td>
-							</tr>
-							<tr>
-								<td>Latte</td>
-								<td>130 g.</td>
-								<td>56</td>
-								<td>2,25 $</td>
-								<td>N</td>
-								<td class="text-end">
-									<a href="beverage.html" title="Edit beverage"
-									   th:href="@{beverage/{id}(id=1)}">
-										<i class="bi-pen"></i>&nbsp;<span class="d-none d-md-inline">Edit</span>
-									</a>&nbsp;
-									<span data-toggle="modal" data-target="#deleteModal">
-										<a href="#" >
-											<i class="bi-x"></i><span class="d-none d-md-inline">Delete</span>
-										</a>
-									</span>
-								</td>
-							</tr>
-							<tr>
-								<td>Mocachino</td>
-								<td>90 g.</td>
-								<td>60</td>
-								<td>2,40 $</td>
-								<td>N</td>
-								<td class="text-end">
-									<a href="beverage.html" title="Edit beverage"
-									   th:href="@{beverage/{id}(id=1)}">
-										<i class="bi-pen"></i>&nbsp;<span class="d-none d-md-inline">Edit</span>
-									</a>&nbsp;
-									<span data-toggle="modal" data-target="#deleteModal">
-										<a href="#" >
-											<i class="bi-x"></i><span class="d-none d-md-inline">Delete</span>
-										</a>
-									</span>
-								</td>
-							</tr>
-							<tr>
-								<td>Latte macchiato</td>
-								<td>120 g.</td>
-								<td>38</td>
-								<td>2,85 $</td>
-								<td>N</td>
-								<td class="text-end">
-									<a href="beverage.html" title="Edit beverage"
-									   th:href="@{beverage/{id}(id=1)}">
-										<i class="bi-pen"></i>&nbsp;<span class="d-none d-md-inline">Edit</span>
-									</a>&nbsp;
-									<span data-toggle="modal" data-target="#deleteModal">
-										<a href="#" >
-											<i class="bi-x"></i><span class="d-none d-md-inline">Delete</span>
-										</a>
-									</span>
-								</td>
-							</tr>
-							<tr>
-								<td>Hot chocolate</td>
-								<td>120 g.</td>
-								<td>41</td>
-								<td>2,65 $</td>
-								<td>N</td>
-								<td class="text-end">
-									<a href="beverage.html" title="Edit beverage"
-									   th:href="@{beverage/{id}(id=1)}">
-										<i class="bi-pen"></i>&nbsp;<span class="d-none d-md-inline">Edit</span>
-									</a>&nbsp;
-									<span data-toggle="modal" data-target="#deleteModal">
+									<span data-toggle="modal" data-target="#deleteModal"
+										  th:attr="data-id=${beverage.beverageId}, data-name=${beverage.beverageTitle}">
 										<a href="#" >
 											<i class="bi-x"></i><span class="d-none d-md-inline">Delete</span>
 										</a>
@@ -241,8 +120,23 @@
 			<hr/>
 			<p class="text-center">&copy; 2021</p>
 		</footer>
+
+		<!-- Modal message -->
+		<div class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+			 th:id="${message} ? 'myModal' : #{false}">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<h5 th:text="${message}"></h5>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		
-		<!-- Modal -->
+		<!-- Modal delete -->
 		<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -253,16 +147,17 @@
 						Do you really want to delete beverage «Americano»?
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-danger">Delete</button>
+						<a href="#" id="deleteUrl" class="btn btn-danger">Delete</a>
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
 					</div>
 				</div>
 			</div>
 		</div>
 		
-	</body>	
-	
+	</body>
 
+	<script src="../../resources/static/js/jquery-3.2.1.js"
+			th:href="@{/resources/static/js/jquery-3.2.1.js}"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" 
 				integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" 
 				crossorigin="anonymous">
@@ -270,6 +165,26 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" 
 				integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" 
 				crossorigin="anonymous">
+	</script>
+
+	<script>
+		// при открытии модального окна
+		$('#deleteModal').on('show.bs.modal', function (event) {
+		// получить кнопку, которая его открылa
+		var button = $(event.relatedTarget)
+		// извлечь информацию из атрибутов data-name и data-id
+		var name = button.data('name')
+		var id = button.data('id')
+		// вывести эту информацию в модальное окно
+		$(this).find('.modal-body').text('Do you really want to delete department "'+name+'"?');
+		$(this).find('#deleteUrl').attr('href', '/beverage/'+id+'/delete');
+		})
+	</script>
+
+	<script>
+		$(document).ready(function () {
+		$('#myModal').modal('show');
+		});
 	</script>
 
 	

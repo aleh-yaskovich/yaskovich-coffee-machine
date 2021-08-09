@@ -13,7 +13,7 @@
 		<link href="../../resources/static/css/style.css"
 			  th:href="@{/resources/static/css/style.css}" rel="stylesheet">
 
-		<title>Create Beverage</title>
+		<title th:text="${isNew} ? 'Create new beverage' : ${message}">Create Beverage</title>
 	</head>
 	<body>
 	
@@ -54,7 +54,8 @@
 		
 			<nav id="main-header" class="navbar py-1 mb-3 beverage-title">
 				<div class="container-xxl">
-					<span class="navbar-brand text-uppercase">Create new beverage</span>
+					<span class="navbar-brand text-uppercase"
+						  th:text="${isNew} ? 'Create new beverage' : ${message}">Create new beverage</span>
 				</div>
 			</nav>
 			
@@ -66,54 +67,70 @@
 				<!-- Left column begin -->
 				<div class="col">
 					
-					<form>
+					<form id="beverageForm"
+						  th:object="${beverage}"
+						  action="beverages.html"
+						  th:action="@{${#httpServletRequest.servletPath}}"
+						  th:method="@{post}">
+						<input 	id="field_beverageId"
+								  type="hidden"
+								  th:field="*{beverageId}" />
 						<div class="mb-2 col-9">
-							<label for="exampleInputEmail1" class="form-label">Title:</label>
-							<input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Title of beverage">
+							<label for="field_beverageTitle" class="form-label">Title:</label>
+							<input class="form-control" id="field_beverageTitle" type="text"
+								   th:field="*{beverageTitle}">
 						</div>
 						<div class="row">
 							<div class="mb-2 col-6">
-								<label for="exampleInputPassword1" class="form-label">Coffee (gram): </label>
-								<input class="form-control" id="exampleInputPassword1" placeholder="Non-negative number">
+								<label for="field_beverageIngCoffee" class="form-label">Coffee (gram): </label>
+								<input class="form-control" id="field_beverageIngCoffee" type="text"
+									   th:field="*{beverageIngCoffee}">
 							</div>
 							<div class="mb-2 col-6">
-								<label for="exampleInputPassword1" class="form-label">Chocolate (gram): </label>
-								<input class="form-control" id="exampleInputPassword1" placeholder="Non-negative number">
+								<label for="field_beverageIngChocolate" class="form-label">Chocolate (gram): </label>
+								<input class="form-control" id="field_beverageIngChocolate" type="text"
+									   th:field="*{beverageIngChocolate}">
 							</div>
 						</div>
 						<div class="row">
 							<div class="mb-2 col-6">
-								<label for="exampleInputPassword1" class="form-label">Milk (gram): </label>
-								<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Non-negative number">
+								<label for="field_beverageIngMilk" class="form-label">Milk (gram): </label>
+								<input class="form-control" id="field_beverageIngMilk" type="text"
+									   th:field="*{beverageIngMilk}">
 							</div>
 							<div class="mb-2 col-6">
-								<label for="exampleInputPassword1" class="form-label">Water (gram): </label>
-								<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Non-negative number">
+								<label for="field_beverageIngWater" class="form-label">Water (gram): </label>
+								<input class="form-control" id="field_beverageIngWater" type="text"
+									   th:field="*{beverageIngWater}">
 							</div>
 						</div>
 						<hr/>
 						<p>The possibility of adding other ingredients: </p>
 						
 						<div class="mb-2 form-check">
-							<input type="checkbox" class="form-check-input" id="exampleCheck1" checked>
-							<label class="form-check-label" for="exampleCheck1">Sugar</label>
+							<input type="checkbox" class="form-check-input" id="field_beverageIngSugar"
+								   th:field="*{beverageIngSugar}">
+							<label class="form-check-label" for="field_beverageIngSugar">Sugar</label>
 						</div>
 						<div class="mb-2 form-check">
-							<input type="checkbox" class="form-check-input" id="exampleCheck1">
-							<label class="form-check-label" for="exampleCheck1">Syrup</label>
+							<input type="checkbox" class="form-check-input" id="field_beverageIngSyrup"
+								   th:field="*{beverageIngSyrup}">
+							<label class="form-check-label" for="field_beverageIngSyrup">Syrup</label>
 						</div>
 						<div class="mb-3 form-check">
-							<input type="checkbox" class="form-check-input" id="exampleCheck1">
-							<label class="form-check-label" for="exampleCheck1">Cinnamon</label>
+							<input type="checkbox" class="form-check-input" id="field_beverageIngCinnamon"
+								   th:field="*{beverageIngCinnamon}">
+							<label class="form-check-label" for="field_beverageIngCinnamon">Cinnamon</label>
 						</div>
 						<hr/>
 						
 						<div class="mb-4 form-check">
-							<input type="checkbox" class="form-check-input" id="exampleCheck1" checked>
-							<label class="form-check-label" for="exampleCheck1">Hidden</label>
+							<input type="checkbox" class="form-check-input" id="field_beverageHidden"
+								   th:field="*{beverageHidden}">
+							<label class="form-check-label" for="field_beverageHidden">Hidden</label>
 						</div>
 						
-						<button type="submit" class="btn btn-success">Create</button>
+						<button type="submit" class="btn btn-success" th:text="${isNew} ? 'Create' : 'Update'">Create</button>
 					</form>
 					
 				</div>

@@ -15,8 +15,8 @@ a { text-decoration:none; }
 .credit-add a { float:right;color:#fff;text-decoration:none; }
 .right-column button { margin:7px 0; }
 .selected-beverages { margin-bottom:12px;font-size:14px;color:#330000; }
-.selected-beverages span { float:right;color:#bf0000;font-weight:bold; }
 .selected-beverages i { color:#bf0000; }
+.del-beverage { float:right;color:#bf0000;font-weight:bold; }
 
 table { background:#fff;color:#330000; }
 table a { color:#330000; }

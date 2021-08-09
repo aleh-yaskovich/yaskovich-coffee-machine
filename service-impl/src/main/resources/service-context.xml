@@ -13,4 +13,8 @@
         <constructor-arg ref="beverageDao" />
     </bean>
 
+    <bean id="clientService" class="com.epam.brest.service.impl.ClientServiceImpl" >
+        <constructor-arg ref="clientDao" />
+    </bean>
+
 </beans>
