@@ -156,6 +156,7 @@ public class BeverageDaoJdbc implements BeverageDao {
             beverage.setBeverageIngCinnamon(resultSet.getBoolean("BEVERAGE_ING_CINNAMON"));
             beverage.setBeverageHidden(resultSet.getBoolean("BEVERAGE_HIDDEN"));
             beverage.setBeveragePrice(resultSet.getDouble("BEVERAGE_PRICE"));
+            beverage.setBeverageQuantity(resultSet.getInt("BEVERAGE_QUANTITY"));
             return beverage;
         }
     }

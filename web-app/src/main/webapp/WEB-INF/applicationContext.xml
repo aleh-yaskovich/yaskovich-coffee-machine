@@ -71,28 +71,12 @@
     </bean>
 
     <bean id="beverageService" class="com.epam.brest.service.impl.BeverageServiceImpl">
-        <constructor-arg ref="ingredientDao" />
         <constructor-arg ref="beverageDao" />
     </bean>
 
     <bean id="clientService" class="com.epam.brest.service.impl.ClientServiceImpl">
         <constructor-arg ref="clientDao" />
     </bean>
-
-<!--    &lt;!&ndash; Controllers &ndash;&gt;-->
-<!--    <bean id="ingredientController" class="com.epam.brest.web_app.IngredientController">-->
-<!--        <constructor-arg ref="ingredientService" />-->
-<!--    </bean>-->
-
-<!--    <bean id="beverageController" class="com.epam.brest.web_app.BeverageController">-->
-<!--        <constructor-arg ref="beverageService" />-->
-<!--    </bean>-->
-
-<!--    <bean id="clientController" class="com.epam.brest.web_app.ClientController">-->
-<!--        <constructor-arg ref="ingredientService" />-->
-<!--        <constructor-arg ref="beverageService" />-->
-<!--        <constructor-arg ref="clientService" />-->
-<!--    </bean>-->
 
     <!-- Thymleaf -->
     <bean id="templateResolver" class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">

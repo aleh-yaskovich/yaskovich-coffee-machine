@@ -9,7 +9,6 @@
     </bean>
 
     <bean id="beverageService" class="com.epam.brest.service.impl.BeverageServiceImpl" >
-        <constructor-arg ref="ingredientDao" />
         <constructor-arg ref="beverageDao" />
     </bean>
 
