@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebAppConfiguration
-@ContextConfiguration(locations = "classpath:web-context-test.xml")
+@ContextConfiguration(classes = WebAppTestConfig.class)
 class BeverageControllerIT {
 
     @Autowired

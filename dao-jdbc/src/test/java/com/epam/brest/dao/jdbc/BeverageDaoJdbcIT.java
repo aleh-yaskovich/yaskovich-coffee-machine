@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations = {"classpath*:test-db-config.xml","classpath:test-dao.xml"})
+@ContextConfiguration(classes = DaoTestConfig.class)
 class BeverageDaoJdbcIT {
 
     @Autowired
