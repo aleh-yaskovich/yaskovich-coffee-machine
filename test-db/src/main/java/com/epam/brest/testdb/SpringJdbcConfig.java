@@ -11,32 +11,32 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 import javax.sql.DataSource;
 
-@Configuration
+//@Configuration
 public class SpringJdbcConfig {
 
-    @Bean
-    public DataSource h2DataSource() {
-        EmbeddedDatabase db = new EmbeddedDatabaseBuilder()
-                .generateUniqueName(true)
-                .setType(EmbeddedDatabaseType.H2)
-                .addScripts("create-test-db.sql", "init-test-db.sql")
-                .build();
-        return db;
-    }
-
-    @Bean
-    public JdbcTemplate jdbcTemplate() {
-        return new JdbcTemplate(h2DataSource());
-    }
-
-    @Bean
-    public NamedParameterJdbcTemplate namedParameterJdbcTemplate() {
-        return new NamedParameterJdbcTemplate(h2DataSource());
-    }
-
-    @Bean
-    public DataSourceTransactionManager transactionManager() {
-        return new DataSourceTransactionManager(h2DataSource());
-    }
+//    @Bean
+//    public DataSource h2DataSource() {
+//        EmbeddedDatabase db = new EmbeddedDatabaseBuilder()
+//                .generateUniqueName(true)
+//                .setType(EmbeddedDatabaseType.H2)
+//                .addScripts("create-test-db.sql", "init-test-db.sql")
+//                .build();
+//        return db;
+//    }
+//
+//    @Bean
+//    public JdbcTemplate jdbcTemplate() {
+//        return new JdbcTemplate(h2DataSource());
+//    }
+//
+//    @Bean
+//    public NamedParameterJdbcTemplate namedParameterJdbcTemplate() {
+//        return new NamedParameterJdbcTemplate(h2DataSource());
+//    }
+//
+//    @Bean
+//    public DataSourceTransactionManager transactionManager() {
+//        return new DataSourceTransactionManager(h2DataSource());
+//    }
 
 }

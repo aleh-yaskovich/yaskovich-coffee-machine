@@ -1,5 +1,7 @@
 package com.epam.brest.web_app;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
@@ -10,7 +12,6 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
@@ -19,16 +20,9 @@ import org.thymeleaf.templatemode.TemplateMode;
 
 import javax.sql.DataSource;
 
-@Configuration
-@EnableWebMvc
+@SpringBootApplication
 @ComponentScan("com.epam.brest*")
-public class ApplicationMvcConfig implements WebMvcConfigurer {
-
-    private final ApplicationContext applicationContext;
-
-    public ApplicationMvcConfig(ApplicationContext applicationContext) {
-        this.applicationContext = applicationContext;
-    }
+public class ApplicationMvcConfig {
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
@@ -62,33 +56,8 @@ public class ApplicationMvcConfig implements WebMvcConfigurer {
         return new NamedParameterJdbcTemplate(dataSource());
     }
 
-    @Bean
-    public SpringResourceTemplateResolver templateResolver(){
-        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-        templateResolver.setApplicationContext(this.applicationContext);
-        templateResolver.setPrefix("/WEB-INF/templates/");
-        templateResolver.setSuffix(".html");
-        templateResolver.setTemplateMode(TemplateMode.HTML);
-        templateResolver.setCacheable(true);
-        return templateResolver;
-    }
-
-    @Bean
-    public SpringTemplateEngine templateEngine(){
-        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-        templateEngine.setTemplateResolver(templateResolver());
-        templateEngine.setEnableSpringELCompiler(true);
-        return templateEngine;
-    }
-
-    @Bean
-    public ThymeleafViewResolver viewResolver(){
-        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-        viewResolver.setTemplateEngine(templateEngine());
-        // NOTE 'order' and 'viewNames' are optional
-        viewResolver.setOrder(0);
-        viewResolver.setViewNames(new String[] {"*"});
-        return viewResolver;
+    public static void main(String[] args) {
+        SpringApplication.run(ApplicationMvcConfig.class, args);
     }
 
 }
