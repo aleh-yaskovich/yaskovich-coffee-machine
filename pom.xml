@@ -18,6 +18,7 @@
         <module>dao-jdbc</module>
         <module>service</module>
         <module>service-impl</module>
+        <module>rest-app</module>
     </modules>
 
     <distributionManagement>
