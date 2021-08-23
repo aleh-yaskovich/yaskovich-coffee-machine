@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
 @ExtendWith(SpringExtension.class)
 @AutoConfigureMockMvc
 @Transactional
-class IngregientRestControllerIT {
+class IngredientRestControllerIT {
 
     public static final String INGREDIENTS_ENDPOINT = "/ingredients";
 

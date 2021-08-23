@@ -67,7 +67,7 @@ public class BeverageRestController {
      */
     @PutMapping(value = "/beverages", consumes = {"application/json"}, produces = {"application/json"})
     ResponseEntity<Integer> update(@RequestBody Beverage beverage) {
-        LOGGER.debug("update({beverage}), beverage");
+        LOGGER.debug("update({beverage})", beverage);
         Integer res = beverageService.updateBeverage(beverage);
         return res > 0
                 ? new ResponseEntity<>(res, HttpStatus.OK)
