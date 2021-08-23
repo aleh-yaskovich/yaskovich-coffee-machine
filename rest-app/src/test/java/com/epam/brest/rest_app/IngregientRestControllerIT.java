@@ -131,7 +131,7 @@ class IngregientRestControllerIT {
 
         Integer updateIngredient(Ingredient ingredient) throws Exception{
             MockHttpServletResponse response =
-                    mockMvc.perform(post(INGREDIENTS_ENDPOINT)
+                    mockMvc.perform(put(INGREDIENTS_ENDPOINT)
                                     .contentType(MediaType.APPLICATION_JSON)
                                     .content(objectMapper.writeValueAsString(ingredient))
                                     .accept(MediaType.APPLICATION_JSON)

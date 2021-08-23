@@ -51,12 +51,12 @@ public class IngregientRestController {
      * "ingredientTitle":"Coffee","ingredientQuantity":5000,"ingredientExpirationDate":"2021-12-31",
      * "ingredientPrice":31.5,"ingredientRequired":true}'
      **/
-    @PostMapping(value = "/ingredients", consumes = {"application/json"}, produces = {"application/json"})
+    @PutMapping(value = "/ingredients", consumes = {"application/json"}, produces = {"application/json"})
     public ResponseEntity<Integer> updateIngredient(@RequestBody Ingredient ingredient) {
-        LOGGER.debug("updateIngredient({})", ingredient);
-        Integer ingredientId = ingredientService.updateIngredient(ingredient);
-        return ingredientId > 0
-                ? new ResponseEntity<>(ingredientId, HttpStatus.OK)
+        LOGGER.debug("updateIngredient({ingredient})", ingredient);
+        Integer res = ingredientService.updateIngredient(ingredient);
+        return res > 0
+                ? new ResponseEntity<>(res, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
