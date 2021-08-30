@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 public class IngregientRestController {
@@ -59,4 +60,14 @@ public class IngregientRestController {
                 ? new ResponseEntity<>(res, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    /**
+     * Calculate prices for optional ingredients
+     * curl -v localhost:8080/prices
+     */
+    @GetMapping(value = "/prices")
+    List<Double> getOptionalIngredientsPrices() {
+        LOGGER.debug("getOptionalIngredientsPrices()");
+        return ingredientService.getOptionalIngredientsPrices();
+    };
 }

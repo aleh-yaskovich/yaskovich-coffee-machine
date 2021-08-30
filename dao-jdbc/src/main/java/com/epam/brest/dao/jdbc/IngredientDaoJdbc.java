@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.support.DataAccessUtils;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -14,16 +15,14 @@ import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Component
 public class IngredientDaoJdbc implements IngredientDao {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(IngredientDaoJdbc.class);
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private RowMapper rowMapper = BeanPropertyRowMapper.newInstance(Double.class);
 
     @Value("${ingredient.findAllIngredientsSql}")
     private String findAllIngredientsSql;
@@ -77,6 +76,29 @@ public class IngredientDaoJdbc implements IngredientDao {
     }
 
 
+    /**
+     * Calculate prices for optional ingredients
+     */
+    @Override
+    public List<Double> getOptionalIngredientsPrices() {
+        LOGGER.debug("getOptionalIngredientsPrices()");
+        List<Ingredient> ingredients = namedParameterJdbcTemplate.query(findAllIngredientsSql, new IngredientRowMapper());
+        List<Double> optionalIngredientsPrices = Arrays.asList(
+                roundNumberTo2(ingredients.get(4).getIngredientPrice() / 1000 * 3),
+                roundNumberTo2(ingredients.get(5).getIngredientPrice() / 1000 * 10),
+                roundNumberTo2(ingredients.get(6).getIngredientPrice() / 1000 * 2)
+        );
+        return optionalIngredientsPrices;
+    }
+
+    /**
+     * Round a fractional number to two decimal places
+     **/
+    private double roundNumberTo2(double d) {
+        double scale = Math.pow(10, 2);
+        double result = Math.ceil(d * scale) / scale;
+        return result;
+    }
 
     private class IngredientRowMapper implements RowMapper<Ingredient>{
         @Override

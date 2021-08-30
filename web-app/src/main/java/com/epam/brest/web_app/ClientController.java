@@ -2,10 +2,9 @@ package com.epam.brest.web_app;
 
 import com.epam.brest.model.Beverage;
 import com.epam.brest.model.Client;
-import com.epam.brest.model.Ingredient;
-import com.epam.brest.service.BeverageService;
-import com.epam.brest.service.ClientService;
-import com.epam.brest.service.IngredientService;
+import com.epam.brest.service.rest.BeverageServiceRest;
+import com.epam.brest.service.rest.ClientServiceRest;
+import com.epam.brest.service.rest.IngredientServiceRest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -15,33 +14,39 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
 public class ClientController {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(ClientController.class);
-    private final IngredientService ingredientService;
-    private final BeverageService beverageService;
-    private final ClientService clientService;
-
+    private final BeverageServiceRest beverageService;
+    private final ClientServiceRest clientService;
+    private final IngredientServiceRest ingredientService;
 
     private Client client = new Client();
     private int count = 1;
+    public String message;
 
-    public ClientController(IngredientService ingredientService, BeverageService beverageService, ClientService clientService) {
-        this.ingredientService = ingredientService;
+    public ClientController(BeverageServiceRest beverageService, ClientServiceRest clientService, IngredientServiceRest ingredientServiceRest) {
         this.beverageService = beverageService;
         this.clientService = clientService;
+        this.ingredientService = ingredientServiceRest;
     }
 
     /**
      * Show Client page
      **/
     @GetMapping(value = "/client")
-    public String showClientPage(String message, Model model) {
+    public String showClientPage(Model model) {
         LOGGER.debug("showClientPage()");
-        double[] ingPriceArr = optionalIngredientsPrice();
+        double[] ingPriceArr = new double[3];
+        List<Double> listDouble = ingredientService.getOptionalIngredientsPrices();
+        if(listDouble.size() == 3) {
+            for(int i = 0; i < 3; i++)
+                ingPriceArr[i] = listDouble.get(i);
+        }
 
         model.addAttribute("message", message);
         model.addAttribute("isActive", (this.client.getTotalPrice() == 0.0));
@@ -51,7 +56,8 @@ public class ClientController {
         model.addAttribute("selectedBeverages", this.client.getSelectedBeverages());
         model.addAttribute("credit", String.format("%.2f", this.client.getClientCredit()));
         model.addAttribute("totalPrice", String.format("%.2f", this.client.getTotalPrice()));
-        model.addAttribute("optionalIngPrice", ingPriceArr);
+        model.addAttribute("optionalIngPrice", Arrays.stream(ingPriceArr).toArray());
+        message = null;
         return "client";
     }
 
@@ -71,27 +77,30 @@ public class ClientController {
      **/
     @PostMapping(value = "/client/{id}")
     public String addBeverage(@PathVariable Integer id, Beverage newBeverage, Model model) {
-        LOGGER.debug("addBeverage({},{})", id, newBeverage);
+        LOGGER.debug("addBeverage({id},{newBeverage})", id, newBeverage);
         try{
             // find selected beverage by Id
             Beverage selectedBeverage = beverageService.findBeverageById(id);
+            selectedBeverage.setBeverageIngSugar(false);
+            selectedBeverage.setBeverageIngSyrup(false);
+            selectedBeverage.setBeverageIngCinnamon(false);
             // calculate price of optional ingredients and
             // create string of optional ingredients
             double optionalIngPrice = 0.0;
             String optionalIngredients = "";
-            double[] ingPriceArr = optionalIngredientsPrice();
+            List<Double> ingPriceArr = ingredientService.getOptionalIngredientsPrices();
             if(newBeverage.isBeverageIngSugar()) {
-                optionalIngPrice += ingPriceArr[0];
+                optionalIngPrice += ingPriceArr.get(0);
                 optionalIngredients += " + sugar";
                 selectedBeverage.setBeverageIngSugar(true);
             }
             if(newBeverage.isBeverageIngSyrup()) {
-                optionalIngPrice += ingPriceArr[1];
+                optionalIngPrice += ingPriceArr.get(1);
                 optionalIngredients += " + syrup";
                 selectedBeverage.setBeverageIngSyrup(true);
             }
             if(newBeverage.isBeverageIngCinnamon()) {
-                optionalIngPrice += ingPriceArr[2];
+                optionalIngPrice += ingPriceArr.get(2);
                 optionalIngredients += " + cinnamon";
                 selectedBeverage.setBeverageIngCinnamon(true);
             }
@@ -105,7 +114,7 @@ public class ClientController {
             this.client.setSelectedBeverages(selectedList);
             this.client.setTotalPrice(calculateTotalPrice(selectedList));
         } catch (IllegalArgumentException ex) {
-            model.addAttribute("message", ex.getMessage());
+            message = ex.getMessage();
         }
         return "redirect:/client";
     }
@@ -146,9 +155,9 @@ public class ClientController {
             this.client.setTotalPrice(0);
             clientService.updateIngredientQuantity(selectedList);
             this.client.setSelectedBeverages(new ArrayList<>());
-            model.addAttribute("message", "Enjoy your beverage!");
+            message = "Enjoy your beverage!";
         } else {
-            model.addAttribute("message", "You don't have enough credit. Press + Add to increase your credit");
+            message = "You don't have enough credit. Press +Add to increase your credit";
         }
         return "redirect:/client";
     }
@@ -161,20 +170,6 @@ public class ClientController {
         for(Beverage beverage : selectedBeverages)
             totalPrice += beverage.getBeveragePrice();
         return roundNumberTo2(totalPrice);
-    }
-
-    /**
-     * Calculate price of non-required ingredients
-     **/
-    private double[] optionalIngredientsPrice() {
-        // We can add 3 g. of sugar, 10 g. of syrup and 2 g. of cinnamon to every beverage
-        List<Ingredient> ingredients = ingredientService.findAllIngredients();
-        double[] optionalIngredientsPrice = {
-                roundNumberTo2(ingredients.get(4).getIngredientPrice()/1000*3),
-                roundNumberTo2(ingredients.get(5).getIngredientPrice()/1000*10),
-                roundNumberTo2(ingredients.get(6).getIngredientPrice()/1000*2)
-        };
-        return optionalIngredientsPrice;
     }
 
     /**

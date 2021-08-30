@@ -1,8 +1,7 @@
 package com.epam.brest.web_app;
 
-import com.epam.brest.model.Beverage;
 import com.epam.brest.model.Ingredient;
-import com.epam.brest.service.IngredientService;
+import com.epam.brest.service.rest.IngredientServiceRest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -16,9 +15,11 @@ public class IngredientController {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(IngredientController.class);
 
-    private final IngredientService ingredientService;
+    private final IngredientServiceRest ingredientService;
 
-    public IngredientController(IngredientService ingredientService) {
+    public String message;
+
+    public IngredientController(IngredientServiceRest ingredientService) {
         this.ingredientService = ingredientService;
     }
 
@@ -26,10 +27,11 @@ public class IngredientController {
      * Show ingredients list
      * */
     @GetMapping("/ingredients")
-    public String showAllIngredients(String message, Model model) {
+    public String showAllIngredients(Model model) {
         LOGGER.debug("showAllIngredients()");
         model.addAttribute("ingredients", ingredientService.findAllIngredients());
         model.addAttribute("message", message);
+        message = null;
         return "ingredients";
     }
 
@@ -44,7 +46,7 @@ public class IngredientController {
             model.addAttribute("ingredient", ingredient);
             return "ingredient";
         } catch (IllegalArgumentException ex) {
-            model.addAttribute("message", ex.getMessage());
+            message =  ex.getMessage();
             return "ingredients";
         }
     }
@@ -56,7 +58,7 @@ public class IngredientController {
     public String updateIngredient(Ingredient ingredient, Model model) {
         LOGGER.debug("updateIngredient({})", ingredient);
         ingredientService.updateIngredient(ingredient);
-        model.addAttribute("message", "The ingredient updated successfully!");
+        message = "The ingredient updated successfully!";
         return "redirect:/ingredients";
     }
 }

@@ -22,4 +22,9 @@ public interface IngredientDao {
      * Update selected ingredient
      */
     Integer updateIngredient(Ingredient ingredient);
+
+    /**
+     * Calculate prices for optional ingredients
+     */
+    List<Double> getOptionalIngredientsPrices();
 }

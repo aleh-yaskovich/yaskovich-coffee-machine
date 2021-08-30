@@ -1,7 +1,7 @@
 package com.epam.brest.web_app;
 
 import com.epam.brest.model.Beverage;
-import com.epam.brest.service.BeverageService;
+import com.epam.brest.service.rest.BeverageServiceRest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -15,9 +15,11 @@ public class BeverageController {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(BeverageController.class);
 
-    private final BeverageService beverageService;
+    private final BeverageServiceRest beverageService;
 
-    public BeverageController(BeverageService beverageService) {
+    public String message;
+
+    public BeverageController(BeverageServiceRest beverageService) {
         this.beverageService = beverageService;
     }
 
@@ -26,10 +28,11 @@ public class BeverageController {
      * Show beverage list
      * */
     @GetMapping("/beverages")
-    public String showAllBeverages(String message, Model model) {
+    public String showAllBeverages(Model model) {
         LOGGER.debug("showAllBeverages()");
         model.addAttribute("beverages", beverageService.findAllBeverages());
         model.addAttribute("message", message);
+        message = null;
         return "beverages";
     }
 
@@ -52,9 +55,9 @@ public class BeverageController {
         LOGGER.debug("createNewBeverage({})", beverage);
         try {
             beverageService.createBeverage(beverage);
-            model.addAttribute("message", "The beverage created successfully!");
+            message = "The beverage created successfully!";
         } catch (IllegalArgumentException ex) {
-            model.addAttribute("message", ex.getMessage());
+            message = ex.getMessage();
         } finally {
             model.addAttribute("beverages", beverageService.findAllBeverages());
             return "redirect:/beverages";
@@ -75,7 +78,7 @@ public class BeverageController {
             model.addAttribute("isNew", false);
             return "beverage";
         } catch (IllegalArgumentException ex) {
-            model.addAttribute("message", ex.getMessage());
+            message = ex.getMessage();
             model.addAttribute("beverages", beverageService.findAllBeverages());
             return "redirect:/beverages";
         }
@@ -88,7 +91,7 @@ public class BeverageController {
     public String updateBeverage(Beverage beverage, Model model) {
         LOGGER.debug("updateBeverage({})", beverage);
         beverageService.updateBeverage(beverage);
-        model.addAttribute("message", "The beverage updated successfully!");
+        message = "The beverage updated successfully!";
         return "redirect:/beverages";
     }
 
@@ -99,10 +102,10 @@ public class BeverageController {
     public String deleteBeverageById(@PathVariable Integer id, Model model) {
         LOGGER.debug("deleteBeverageById({})", id, model);
         if(beverageService.deleteBeverage(id) == 1)
-            model.addAttribute("message", "The beverage deleted successfully!");
+            message = "The beverage deleted successfully!";
         else if(beverageService.deleteBeverage(id) == 0)
-            model.addAttribute("message", "");
-        else model.addAttribute("message", "");
+            message = "The beverage is not deleted!";
+        else message = "Something is wrong";
         return "redirect:/beverages";
     }
 }

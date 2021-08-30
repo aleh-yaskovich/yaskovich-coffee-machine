@@ -55,4 +55,11 @@ class IngredientDaoJdbcIT {
         Ingredient testIngredient = ingredientDaoJdbc.findIngredientById(ingredient.getIngredientId()).get();
         Assertions.assertEquals("TEST", testIngredient.getIngredientTitle());
     }
+
+    @Test
+    void getOptionalIngredientsPricesTest() {
+        List<Double> prices = ingredientDaoJdbc.getOptionalIngredientsPrices();
+        Assertions.assertNotNull(prices);
+        Assertions.assertTrue(prices.size() == 3);
+    }
 }

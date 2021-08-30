@@ -107,14 +107,10 @@ class BeverageRestControllerIT {
 
     @Test
     void deleteTest() throws Exception {
-        Integer id = beverageService.createBeverage(new Beverage());
         List<Beverage> beverages = beverageService.findAllBeverages();
         assertTrue(beverages.size() > 0);
-        int listSize = beverages.size();
-
-        id = beverageService.deleteBeverage(listSize);
-        List<Beverage> testBeverages = beverageService.findAllBeverages();
-        assertTrue(testBeverages.size() == (listSize - 1));
+        Integer res = beverageService.deleteBeverage(beverages.size() - 1);
+        assertTrue(res > 0);
     }
 
     /////////////////////////////////////////////////////////////////////////////////

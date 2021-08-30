@@ -19,6 +19,7 @@
         <module>service</module>
         <module>service-impl</module>
         <module>rest-app</module>
+        <module>service-rest</module>
     </modules>
 
     <distributionManagement>
@@ -89,6 +90,11 @@
             <dependency>
                 <groupId>com.epam.brest</groupId>
                 <artifactId>service-impl</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.epam.brest</groupId>
+                <artifactId>service-rest</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

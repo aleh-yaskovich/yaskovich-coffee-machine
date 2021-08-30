@@ -52,4 +52,13 @@ public class IngredientServiceImpl implements IngredientService {
         LOGGER.debug("updateIngredient({})", ingredient);
         return ingredientDao.updateIngredient(ingredient);
     }
+
+    /**
+     * Calculate prices for optional ingredients
+     */
+    @Override
+    public List<Double> getOptionalIngredientsPrices() {
+        LOGGER.debug("getOptionalIngredientsPrices()");
+        return ingredientDao.getOptionalIngredientsPrices();
+    }
 }
