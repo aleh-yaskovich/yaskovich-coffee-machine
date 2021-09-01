@@ -1,15 +1,23 @@
 package com.epam.brest.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.sql.Date;
 import java.util.Objects;
 
 public class Ingredient {
 
+    @Schema(description = "Ingredient ID")
     private int ingredientId;
+    @Schema(description = "Ingredient title")
     private String ingredientTitle;
+    @Schema(description = "Quantity of ingredient in coffee-machine")
     private int ingredientQuantity;
+    @Schema(description = "Expiration date of ingredient")
     private Date ingredientExpirationDate;
+    @Schema(description = "Ingredients price per 1000 (grams, milliliters, pieces, etc.)")
     private Double ingredientPrice;
+    @Schema(description = "The ingredient is always added or at the wish of the client")
     private boolean ingredientRequired;
 
     public Ingredient() {

@@ -3,20 +3,22 @@ package com.epam.brest.rest_app;
 import com.epam.brest.model.Beverage;
 import com.epam.brest.service.impl.BeverageServiceImpl;
 import com.epam.brest.service.impl.ClientServiceImpl;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
 @RestController
+@Tag(
+        name="Client controller",
+        description="Provides affordable beverages and takes orders"
+)
 public class ClientRestController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ClientRestController.class);
@@ -34,6 +36,10 @@ public class ClientRestController {
      * Return list with all visible beverages
      * curl -v localhost:8080/client
      */
+    @Operation(
+            summary = "Return beverages",
+            description = "Return list with all visible beverages"
+    )
     @GetMapping(value = "/client")
     Collection<Beverage> selectedBeverages() {
         LOGGER.debug("selectedBeverages()");
@@ -49,6 +55,10 @@ public class ClientRestController {
      * "beverageIngWater":0,"beverageIngSugar":true,"beverageIngSyrup":false,"beverageIngCinnamon":true,"beveragePrice":1.94,
      * "beverageQuantity":41,"beverageHidden":true}]'
      */
+    @Operation(
+            summary = "Take order",
+            description = "Take selected beverages. And all is OK, change quantity of ingredients and client's credit"
+    )
     @PutMapping(value = "/client", consumes = {"application/json"}, produces = {"application/json"})
     ResponseEntity<Integer> updateIngredients(@RequestBody List<Beverage> selectedBeverages) {
         LOGGER.debug("updateIngredients({selectedBeverages})", selectedBeverages);

@@ -2,7 +2,6 @@ package com.epam.brest.rest_app;
 
 import com.epam.brest.model.Beverage;
 import com.epam.brest.model.Ingredient;
-import com.epam.brest.rest_app.exception.BeverageNotFoundAdvice;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,7 +41,7 @@ class ClientRestControllerIT {
     private BeverageRestController beverageRestController;
 
     @Autowired
-    private IngregientRestController ingregientRestController;
+    private IngredientRestController ingregientRestController;
 
     @Autowired
     protected ObjectMapper objectMapper;

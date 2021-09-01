@@ -53,6 +53,7 @@
         <junit.utReportFolder>${project.testresult.directory}/test</junit.utReportFolder>
         <junit.itReportFolder>${project.testresult.directory}/integrationTest</junit.itReportFolder>
         <mockito.versoin>3.11.2</mockito.versoin>
+        <swagger.version>3.0.0</swagger.version>
     </properties>
 
     <scm>
@@ -103,17 +104,33 @@
                 <version>${project.version}</version>
             </dependency>
             <!-- Flyway -->
-            <dependency>
-                <groupId>org.flywaydb</groupId>
-                <artifactId>flyway-core</artifactId>
-                <version>7.14.0</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>org.flywaydb</groupId>-->
+<!--                <artifactId>flyway-core</artifactId>-->
+<!--                <version>7.14.0</version>-->
+<!--            </dependency>-->
             <!-- Postgresql -->
             <dependency>
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
                 <version>42.2.23</version>
             </dependency>
+            <!-- Swagger -->
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-ui</artifactId>
+                <version>1.5.10</version>
+            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>io.swagger.core.v3</groupId>-->
+<!--                <artifactId>swagger-annotations</artifactId>-->
+<!--                <version>2.1.6</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>org.springdoc</groupId>-->
+<!--                <artifactId>springdoc-openapi-ui</artifactId>-->
+<!--                <version>1.5.2</version>-->
+<!--            </dependency>-->
 
             <dependency>
                 <groupId>org.hamcrest</groupId>

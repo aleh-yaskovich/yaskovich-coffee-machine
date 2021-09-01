@@ -36,7 +36,7 @@ class IngredientRestControllerIT {
     public static final String INGREDIENTS_ENDPOINT = "/ingredients";
 
     @Autowired
-    private IngregientRestController ingregientRestController;
+    private IngredientRestController ingregientRestController;
 
     @Autowired
     private IngredientNotFoundAdvice ingredientNotFoundAdvice;

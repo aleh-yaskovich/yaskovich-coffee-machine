@@ -2,6 +2,8 @@ package com.epam.brest.rest_app;
 
 import com.epam.brest.model.Beverage;
 import com.epam.brest.service.impl.BeverageServiceImpl;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -11,6 +13,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RestController
+@Tag(
+        name="Beverage controller",
+        description="Allows you to perform CRUD-operations on beverages"
+)
 public class BeverageRestController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BeverageRestController.class);
@@ -25,6 +31,10 @@ public class BeverageRestController {
      * Return list with all beverages
      * curl -v localhost:8080/beverages
      */
+    @Operation(
+            summary = "Return beverages",
+            description = "Return list with all beverages"
+    )
     @GetMapping(value = "/beverages")
     Collection<Beverage> beverages() {
         LOGGER.debug("beverages()");
@@ -35,6 +45,10 @@ public class BeverageRestController {
      * Return selected beverage by ID
      * curl -v localhost:8080/beverages/1
      */
+    @Operation(
+            summary = "Return one beverage",
+            description = "Return selected beverage by ID to update it"
+    )
     @GetMapping(value = "/beverages/{id}")
     ResponseEntity<Beverage> beverage(@PathVariable Integer id) {
         LOGGER.debug("beverage({id})", id);
@@ -52,6 +66,10 @@ public class BeverageRestController {
      * "beverageIngSugar":true,"beverageIngSyrup":false,"beverageIngCinnamon":true,"beveragePrice":0.0,"beverageQuantity":0,
      * "beverageHidden":true}'
      */
+    @Operation(
+            summary = "Create beverage",
+            description = "Create new beverage"
+    )
     @PostMapping(value = "/beverages", consumes = {"application/json"}, produces = {"application/json"})
     public ResponseEntity<Integer> create(@RequestBody Beverage beverage) {
         LOGGER.debug("create({beverage})", beverage);
@@ -65,6 +83,10 @@ public class BeverageRestController {
      * "beverageIngCoffee":30,"beverageIngMilk":0,"beverageIngChocolate":0,"beverageIngWater":0,"beverageIngSugar":true,
      * "beverageIngSyrup":false,"beverageIngCinnamon":true,"beveragePrice":0.99,"beverageQuantity":83,"beverageHidden":true}'
      */
+    @Operation(
+            summary = "Update beverage",
+            description = "Update selected beverage"
+    )
     @PutMapping(value = "/beverages", consumes = {"application/json"}, produces = {"application/json"})
     ResponseEntity<Integer> update(@RequestBody Beverage beverage) {
         LOGGER.debug("update({beverage})", beverage);
@@ -78,6 +100,10 @@ public class BeverageRestController {
      * Delete selected beverage
      * curl -X DELETE localhost:8080/beverages/1
      */
+    @Operation(
+            summary = "Delete beverage",
+            description = "Delete selected beverage"
+    )
     @DeleteMapping(value = "/beverages/{id}", produces = {"application/json"})
     ResponseEntity<Integer> delete(@PathVariable Integer id) {
         LOGGER.debug("delete({id})", id);
